@@ -1,0 +1,169 @@
+{
+  "id": "RB-01#1",
+  "runbook": "RB-01",
+  "incidente": "INC-01",
+  "alerta": "CambioDistribucionPredicciones",
+  "severidad": "P2",
+  "inicio_t": 70,
+  "gen": null,
+  "estado": "completado",
+  "pasos": [
+    {
+      "t": 70,
+      "hora": "10:10",
+      "fase": "Identificación",
+      "accion": "CambioDistribucionPredicciones (P2) en INC-01",
+      "resultado": "La mezcla de categorías propuestas cambió (JSD 0.064) sin esperar etiquetas del revisor.",
+      "ok": true
+    },
+    {
+      "t": 70,
+      "hora": "10:10",
+      "fase": "Diagnóstico",
+      "accion": "¿Hubo un despliegue de modelo en las últimas 2 h?",
+      "resultado": "Sí: 1.0.0 → 1.1.0 a las 10:00",
+      "ok": true
+    },
+    {
+      "t": 70,
+      "hora": "10:10",
+      "fase": "Diagnóstico",
+      "accion": "¿Las entradas están estables (PSI < 0.20)?",
+      "resultado": "Sí (PSI máx. 0.070): el cambio está en el modelo, no en los datos",
+      "ok": true,
+      "datos": {
+        "psi_max": 0.0695
+      }
+    },
+    {
+      "t": 70,
+      "hora": "10:10",
+      "fase": "Diagnóstico",
+      "accion": "Comparar mezcla de predicciones vs referencia",
+      "resultado": "SALUD 25% → 6%; MARKETING 22% → 42% (JSD 0.064)",
+      "ok": true,
+      "datos": {
+        "mezcla": {
+          "jsd": 0.0644,
+          "mezcla_ref": {
+            "AUSENCIA": 0.249,
+            "MARKETING": 0.225,
+            "NUTRIMENTAL": 0.278,
+            "SALUD": 0.249
+          },
+          "mezcla_act": {
+            "AUSENCIA": 0.228,
+            "MARKETING": 0.425,
+            "NUTRIMENTAL": 0.283,
+            "SALUD": 0.065
+          }
+        }
+      }
+    },
+    {
+      "t": 70,
+      "hora": "10:10",
+      "fase": "Diagnóstico",
+      "accion": "Guardarraíles del rollback",
+      "resultado": "champion = v2, estable = v1 validada en producción; sin otro rollback en las últimas 6 h (control de frecuencia)",
+      "ok": true
+    },
+    {
+      "t": 70,
+      "hora": "10:10",
+      "fase": "Acción",
+      "accion": "Mover alias @champion: v2 → v1 y recargar réplicas",
+      "resultado": "1 réplica(s) sirviendo modelo 1.0.0",
+      "ok": true,
+      "datos": {
+        "respuestas": [
+          {
+            "ts": "2026-11-07T10:10:00-06:00",
+            "evento": "modelo_recargado",
+            "replica": "r1",
+            "version_anterior": "1.1.0",
+            "version_nueva": "1.0.0",
+            "version_registro": "1"
+          }
+        ]
+      }
+    },
+    {
+      "t": 70,
+      "hora": "10:10",
+      "fase": "Validación",
+      "accion": "Prueba de humo con 20 claims dorados",
+      "resultado": "exactitud 0.85, recall SALUD 0.80, todas HTTP 200",
+      "ok": true,
+      "datos": {
+        "n": 20,
+        "exactitud": 0.85,
+        "recall_salud": 0.8,
+        "todas_200": true
+      }
+    },
+    {
+      "t": 70,
+      "hora": "10:10",
+      "fase": "Espera",
+      "accion": "Validación diferida: esperar etiquetas del revisor y estabilidad de las predicciones",
+      "resultado": "Se reanuda a las 10:30",
+      "ok": true
+    },
+    {
+      "t": 90,
+      "hora": "10:30",
+      "fase": "Validación",
+      "accion": "Mezcla de predicciones 15 min después del rollback",
+      "resultado": "JSD 0.004 (umbral 0.04)",
+      "ok": true,
+      "datos": {
+        "jsd": 0.0035
+      }
+    },
+    {
+      "t": 90,
+      "hora": "10:30",
+      "fase": "Validación",
+      "accion": "Exactitud confirmada por el revisor, por versión (últimos 20 min)",
+      "resultado": "modelo 1.0.0: 0.83 (n=217); modelo 1.1.0: 0.66 (n=188)",
+      "ok": true,
+      "datos": {
+        "por_version": {
+          "1.0.0": {
+            "n": 217,
+            "exactitud": 0.8341,
+            "recall_salud": 0.82
+          },
+          "1.1.0": {
+            "n": 188,
+            "exactitud": 0.6596,
+            "recall_salud": 0.0196
+          }
+        }
+      }
+    },
+    {
+      "t": 90,
+      "hora": "10:30",
+      "fase": "Cierre",
+      "accion": "Bloquear la versión revertida y abrir postmortem",
+      "resultado": "v2 etiquetada estado=revertida; postmortem INC-01 (causa en la compuerta del lote)",
+      "ok": true
+    }
+  ],
+  "reanudar_en": null,
+  "fin_t": 90,
+  "restaurado_t": 70,
+  "run_id": "614da273363b4b7681fcc04f195f85b1",
+  "resultado": {
+    "version_revertida": "2",
+    "version_restaurada": "1",
+    "humo": {
+      "n": 20,
+      "exactitud": 0.85,
+      "recall_salud": 0.8,
+      "todas_200": true
+    }
+  }
+}

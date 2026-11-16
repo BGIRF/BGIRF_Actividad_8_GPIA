@@ -1,0 +1,68 @@
+[
+ [
+  "GET",
+  "/health",
+  "Operación",
+  "Verificación de salud (liveness)"
+ ],
+ [
+  "GET",
+  "/api/v1/info",
+  "Operación",
+  "Metadatos y métricas del modelo desplegado"
+ ],
+ [
+  "GET",
+  "/api/v1/reglas",
+  "Operación",
+  "Reglas deterministas disponibles"
+ ],
+ [
+  "GET",
+  "/metrics",
+  "Monitoreo",
+  "Métricas en formato Prometheus"
+ ],
+ [
+  "POST",
+  "/api/v1/clasificar",
+  "Clasificación",
+  "Clasifica un claim y lo enruta a su checklist"
+ ],
+ [
+  "POST",
+  "/api/v1/clasificar/lote",
+  "Clasificación",
+  "Clasifica hasta 50 claims en una sola llamada"
+ ],
+ [
+  "POST",
+  "/api/v1/analizar-etiqueta",
+  "Clasificación",
+  "Analiza una etiqueta completa: enrutamiento + reglas nutrimentales"
+ ],
+ [
+  "POST",
+  "/api/v1/retroalimentacion",
+  "Monitoreo",
+  "Registra la categoría que confirmó el revisor técnico"
+ ],
+ [
+  "POST",
+  "/admin/modelo/recargar",
+  "Administración",
+  "Recarga el modelo al que apunta el alias del registro (rollback / promoción)"
+ ],
+ [
+  "GET",
+  "/admin/caos",
+  "Administración",
+  "Estado de la inyección de fallas"
+ ],
+ [
+  "POST",
+  "/admin/caos",
+  "Administración",
+  "Ajusta fallas inyectadas y controles operativos"
+ ]
+]

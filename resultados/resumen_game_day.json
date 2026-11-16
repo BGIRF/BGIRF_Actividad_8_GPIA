@@ -1,0 +1,179 @@
+{
+  "incidentes": [
+    {
+      "incidente_escenario": "INC-01",
+      "incidente": "INC-01",
+      "falla": "Despliegue de v2 (1.1.0) con etiquetas SALUD mal mapeadas a MARKETING",
+      "falla_hora": "10:00",
+      "severidad": "P2",
+      "alertas": {
+        "CambioDistribucionPredicciones": 70
+      },
+      "primera_alerta_hora": "10:10",
+      "notificado_hora": "10:12",
+      "runbooks": [
+        "RB-01#1"
+      ],
+      "restaurado_hora": "10:10",
+      "cerrado_hora": "10:31",
+      "mttd_min": 10,
+      "ttr_desde_deteccion_min": 0,
+      "ttr_desde_falla_min": 10,
+      "notificaciones": [
+        {
+          "hora": "10:12",
+          "tipo": "abierto",
+          "severidad": "P2",
+          "titulo": "[P2] INC-01 · CambioDistribucionPredicciones"
+        },
+        {
+          "hora": "10:31",
+          "tipo": "resuelto",
+          "severidad": "P2",
+          "titulo": "[P2] INC-01 · calidad_modelo"
+        }
+      ],
+      "ventana": [
+        60,
+        106
+      ],
+      "fin_restauracion": 70,
+      "causa_probable": null
+    },
+    {
+      "incidente_escenario": "INC-02",
+      "incidente": "INC-02",
+      "falla": "Pico de lotes: 20 lotes × 50 claims/min durante 45 min (CPU emulada 6.0 ms/claim)",
+      "falla_hora": "12:00",
+      "severidad": "P2",
+      "alertas": {
+        "CPUSaturacion": 184,
+        "LatenciaSLOQuemaRapida": 191
+      },
+      "primera_alerta_hora": "12:04",
+      "notificado_hora": "12:06",
+      "runbooks": [
+        "RB-02#2"
+      ],
+      "restaurado_hora": "12:23",
+      "cerrado_hora": "13:19",
+      "mttd_min": 4,
+      "ttr_desde_deteccion_min": 19,
+      "ttr_desde_falla_min": 23,
+      "notificaciones": [
+        {
+          "hora": "12:06",
+          "tipo": "abierto",
+          "severidad": "P3",
+          "titulo": "[P3] INC-02 · CPUSaturacion"
+        },
+        {
+          "hora": "12:11",
+          "tipo": "escalado",
+          "severidad": "P2",
+          "titulo": "[P2] INC-02 · LatenciaSLOQuemaRapida"
+        },
+        {
+          "hora": "13:19",
+          "tipo": "resuelto",
+          "severidad": "P2",
+          "titulo": "[P2] INC-02 · rendimiento"
+        }
+      ],
+      "ventana": [
+        180,
+        274
+      ],
+      "fin_restauracion": 203,
+      "causa_probable": null
+    },
+    {
+      "incidente_escenario": "INC-03",
+      "incidente": "INC-03",
+      "falla": "Nuevo segmento: claims en inglés (0 → 50% del tráfico en 20 min)",
+      "falla_hora": "14:00",
+      "severidad": "P1",
+      "alertas": {
+        "DataDriftEntradasCritico": 314,
+        "RecallSaludBajo": 333,
+        "CalidadSLOQuemaRapida": 335,
+        "DataDriftEntradasAdvertencia": 357
+      },
+      "primera_alerta_hora": "14:14",
+      "notificado_hora": "14:16",
+      "runbooks": [
+        "RB-03#3"
+      ],
+      "restaurado_hora": "15:09",
+      "cerrado_hora": "15:10",
+      "mttd_min": 14,
+      "ttr_desde_deteccion_min": 55,
+      "ttr_desde_falla_min": 69,
+      "notificaciones": [
+        {
+          "hora": "14:16",
+          "tipo": "abierto",
+          "severidad": "P2",
+          "titulo": "[P2] INC-03 · DataDriftEntradasCritico"
+        },
+        {
+          "hora": "14:33",
+          "tipo": "escalado",
+          "severidad": "P1",
+          "titulo": "[P1] INC-03 · DataDriftEntradasCritico, RecallSaludBajo"
+        },
+        {
+          "hora": "15:10",
+          "tipo": "resuelto",
+          "severidad": "P1",
+          "titulo": "[P1] INC-03 · datos"
+        }
+      ],
+      "ventana": [
+        300,
+        385
+      ],
+      "fin_restauracion": 369,
+      "causa_probable": "datos"
+    }
+  ],
+  "ruido": {
+    "notificaciones_inteligentes": 8,
+    "notificaciones_por_tipo": {
+      "abierto": 3,
+      "resuelto": 3,
+      "escalado": 2
+    },
+    "inteligentes_fuera_de_incidente": 0,
+    "disparos_ingenuos": 284,
+    "ingenuos_por_regla": {
+      "psi_5m_mayor_0_2": 98,
+      "a_confirmar_mayor_30": 61,
+      "exactitud_10m_baja": 57,
+      "confianza_media_baja": 42,
+      "p95_mayor_300ms": 14,
+      "cpu_mayor_80": 12
+    },
+    "ingenuos_fuera_de_incidente": 65,
+    "reduccion_pct": 97.2,
+    "precision_ingenuo": 0.771,
+    "precision_inteligente": 1.0,
+    "minutos_a_primer_disparo_ingenuo": {
+      "INC-01": 0,
+      "INC-02": 0,
+      "INC-03": 4
+    },
+    "alertas_inhibidas_minuto": 84
+  },
+  "presupuesto_restante": {
+    "disponibilidad": 1.0,
+    "latencia": 0.9976,
+    "calidad_enrutamiento": 0.9911
+  },
+  "umbrales_dinamicos": {
+    "ConfirmacionesRevisorAltas": 0.2868627129247505,
+    "TraficoAnomalo": 60
+  },
+  "errores_cliente": 0,
+  "segundos_reales": 1118.7
+}

@@ -1,0 +1,196 @@
+{
+  "id": "RB-02#2",
+  "runbook": "RB-02",
+  "incidente": "INC-02",
+  "alerta": "LatenciaSLOQuemaRapida",
+  "severidad": "P2",
+  "inicio_t": 191,
+  "gen": null,
+  "estado": "completado",
+  "pasos": [
+    {
+      "t": 191,
+      "hora": "12:11",
+      "fase": "Identificación",
+      "accion": "LatenciaSLOQuemaRapida (P2) en INC-02",
+      "resultado": "p95 de /clasificar en 2177 ms; el presupuesto de latencia se consume 6.1× más rápido.",
+      "ok": true
+    },
+    {
+      "t": 191,
+      "hora": "12:11",
+      "fase": "Diagnóstico",
+      "accion": "Latencia por endpoint y uso de recursos",
+      "resultado": "p95 /clasificar 2171 ms, p95 /lote 3099 ms; CPU máx. 94 %; 1026 claims/min con 1 réplica(s)",
+      "ok": true
+    },
+    {
+      "t": 191,
+      "hora": "12:11",
+      "fase": "Diagnóstico",
+      "accion": "Descartar regresión por despliegue",
+      "resultado": "Sin despliegues en la última hora: causa = carga, no código",
+      "ok": true
+    },
+    {
+      "t": 191,
+      "hora": "12:11",
+      "fase": "Acción",
+      "accion": "Escalar horizontalmente a 3 réplicas (automático)",
+      "resultado": "Réplicas nuevas: r2, r3; total 3",
+      "ok": true
+    },
+    {
+      "t": 191,
+      "hora": "12:11",
+      "fase": "Espera",
+      "accion": "Estabilización después de escalar",
+      "resultado": "Se reanuda a las 12:14",
+      "ok": true
+    },
+    {
+      "t": 194,
+      "hora": "12:14",
+      "fase": "Validación",
+      "accion": "p95 de /clasificar después de escalar",
+      "resultado": "525 ms: sigue sobre 300 ms → se requiere load shedding",
+      "ok": false
+    },
+    {
+      "t": 194,
+      "hora": "12:14",
+      "fase": "Espera",
+      "accion": "Aprobación del on-call para limitar lotes (simulada)",
+      "resultado": "Se reanuda a las 12:18",
+      "ok": true
+    },
+    {
+      "t": 198,
+      "hora": "12:18",
+      "fase": "Acción",
+      "accion": "Load shedding aprobado: máximo 2 lotes concurrentes por réplica",
+      "resultado": "Los lotes excedentes reciben HTTP 429 con Retry-After; /clasificar queda protegido",
+      "ok": true
+    },
+    {
+      "t": 198,
+      "hora": "12:18",
+      "fase": "Espera",
+      "accion": "Validación: p95 sostenido bajo 300 ms",
+      "resultado": "Se reanuda a las 12:23",
+      "ok": true
+    },
+    {
+      "t": 203,
+      "hora": "12:23",
+      "fase": "Validación",
+      "accion": "p95 y burn rate de latencia",
+      "resultado": "p95 1 min 163 ms; burn rate 3 min 0.00×",
+      "ok": true
+    },
+    {
+      "t": 203,
+      "hora": "12:23",
+      "fase": "Espera",
+      "accion": "Vigilar tráfico antes de reducir réplicas",
+      "resultado": "Se reanuda a las 12:28",
+      "ok": true
+    },
+    {
+      "t": 208,
+      "hora": "12:28",
+      "fase": "Espera",
+      "accion": "Vigilar tráfico antes de reducir réplicas",
+      "resultado": "Se reanuda a las 12:33",
+      "ok": true
+    },
+    {
+      "t": 213,
+      "hora": "12:33",
+      "fase": "Espera",
+      "accion": "Vigilar tráfico antes de reducir réplicas",
+      "resultado": "Se reanuda a las 12:38",
+      "ok": true
+    },
+    {
+      "t": 218,
+      "hora": "12:38",
+      "fase": "Espera",
+      "accion": "Vigilar tráfico antes de reducir réplicas",
+      "resultado": "Se reanuda a las 12:43",
+      "ok": true
+    },
+    {
+      "t": 223,
+      "hora": "12:43",
+      "fase": "Espera",
+      "accion": "Vigilar tráfico antes de reducir réplicas",
+      "resultado": "Se reanuda a las 12:48",
+      "ok": true
+    },
+    {
+      "t": 228,
+      "hora": "12:48",
+      "fase": "Espera",
+      "accion": "Vigilar tráfico antes de reducir réplicas",
+      "resultado": "Se reanuda a las 12:53",
+      "ok": true
+    },
+    {
+      "t": 233,
+      "hora": "12:53",
+      "fase": "Espera",
+      "accion": "Vigilar tráfico antes de reducir réplicas",
+      "resultado": "Se reanuda a las 12:58",
+      "ok": true
+    },
+    {
+      "t": 238,
+      "hora": "12:58",
+      "fase": "Espera",
+      "accion": "Vigilar tráfico antes de reducir réplicas",
+      "resultado": "Se reanuda a las 13:03",
+      "ok": true
+    },
+    {
+      "t": 243,
+      "hora": "13:03",
+      "fase": "Espera",
+      "accion": "Vigilar tráfico antes de reducir réplicas",
+      "resultado": "Se reanuda a las 13:08",
+      "ok": true
+    },
+    {
+      "t": 248,
+      "hora": "13:08",
+      "fase": "Espera",
+      "accion": "Vigilar tráfico antes de reducir réplicas",
+      "resultado": "Se reanuda a las 13:13",
+      "ok": true
+    },
+    {
+      "t": 253,
+      "hora": "13:13",
+      "fase": "Espera",
+      "accion": "Vigilar tráfico antes de reducir réplicas",
+      "resultado": "Se reanuda a las 13:18",
+      "ok": true
+    },
+    {
+      "t": 258,
+      "hora": "13:18",
+      "fase": "Cierre",
+      "accion": "Tráfico en línea base 30 min: reducir a 1 réplica (automático)",
+      "resultado": "Se mantiene el límite de lotes concurrentes como control permanente",
+      "ok": true
+    }
+  ],
+  "reanudar_en": null,
+  "fin_t": 258,
+  "restaurado_t": 203,
+  "run_id": "a5bb43371ffa44bca297737cdcd105c2",
+  "resultado": {
+    "replicas_max": 3,
+    "load_shedding": true
+  }
+}

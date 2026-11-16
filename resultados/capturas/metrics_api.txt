@@ -1,0 +1,99 @@
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 9.0042368e+08
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 2.50707968e+08
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.79410104267e+09
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 1.3800000000000001
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 15.0
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 20000.0
+# HELP claimcheck_solicitudes_total Solicitudes HTTP a /api/*
+# TYPE claimcheck_solicitudes_total counter
+claimcheck_solicitudes_total{codigo="200",endpoint="/api/v1/clasificar"} 4.0
+# HELP claimcheck_solicitudes_created Solicitudes HTTP a /api/*
+# TYPE claimcheck_solicitudes_created gauge
+claimcheck_solicitudes_created{codigo="200",endpoint="/api/v1/clasificar"} 1.7941010454103584e+09
+# HELP claimcheck_latencia_segundos Latencia de servidor por endpoint
+# TYPE claimcheck_latencia_segundos histogram
+claimcheck_latencia_segundos_bucket{endpoint="/api/v1/clasificar",le="0.005"} 3.0
+claimcheck_latencia_segundos_bucket{endpoint="/api/v1/clasificar",le="0.01"} 3.0
+claimcheck_latencia_segundos_bucket{endpoint="/api/v1/clasificar",le="0.025"} 4.0
+claimcheck_latencia_segundos_bucket{endpoint="/api/v1/clasificar",le="0.05"} 4.0
+claimcheck_latencia_segundos_bucket{endpoint="/api/v1/clasificar",le="0.1"} 4.0
+claimcheck_latencia_segundos_bucket{endpoint="/api/v1/clasificar",le="0.2"} 4.0
+claimcheck_latencia_segundos_bucket{endpoint="/api/v1/clasificar",le="0.3"} 4.0
+claimcheck_latencia_segundos_bucket{endpoint="/api/v1/clasificar",le="0.5"} 4.0
+claimcheck_latencia_segundos_bucket{endpoint="/api/v1/clasificar",le="0.75"} 4.0
+claimcheck_latencia_segundos_bucket{endpoint="/api/v1/clasificar",le="1.0"} 4.0
+claimcheck_latencia_segundos_bucket{endpoint="/api/v1/clasificar",le="2.0"} 4.0
+claimcheck_latencia_segundos_bucket{endpoint="/api/v1/clasificar",le="5.0"} 4.0
+claimcheck_latencia_segundos_bucket{endpoint="/api/v1/clasificar",le="+Inf"} 4.0
+claimcheck_latencia_segundos_count{endpoint="/api/v1/clasificar"} 4.0
+claimcheck_latencia_segundos_sum{endpoint="/api/v1/clasificar"} 0.021475176000421925
+# HELP claimcheck_latencia_segundos_created Latencia de servidor por endpoint
+# TYPE claimcheck_latencia_segundos_created gauge
+claimcheck_latencia_segundos_created{endpoint="/api/v1/clasificar"} 1.7941010454103816e+09
+# HELP claimcheck_predicciones_total Claims clasificados por categoría
+# TYPE claimcheck_predicciones_total counter
+claimcheck_predicciones_total{categoria="AUSENCIA",version_modelo="1.2.0"} 2.0
+claimcheck_predicciones_total{categoria="SALUD",version_modelo="1.2.0"} 1.0
+claimcheck_predicciones_total{categoria="MARKETING",version_modelo="1.2.0"} 1.0
+# HELP claimcheck_predicciones_created Claims clasificados por categoría
+# TYPE claimcheck_predicciones_created gauge
+claimcheck_predicciones_created{categoria="AUSENCIA",version_modelo="1.2.0"} 1.7941010454099162e+09
+claimcheck_predicciones_created{categoria="SALUD",version_modelo="1.2.0"} 1.7941010454180286e+09
+claimcheck_predicciones_created{categoria="MARKETING",version_modelo="1.2.0"} 1.7941010454220834e+09
+# HELP claimcheck_confianza_prediccion Confianza de la clase propuesta
+# TYPE claimcheck_confianza_prediccion histogram
+claimcheck_confianza_prediccion_bucket{le="0.1"} 0.0
+claimcheck_confianza_prediccion_bucket{le="0.2"} 0.0
+claimcheck_confianza_prediccion_bucket{le="0.3"} 0.0
+claimcheck_confianza_prediccion_bucket{le="0.4"} 0.0
+claimcheck_confianza_prediccion_bucket{le="0.5"} 0.0
+claimcheck_confianza_prediccion_bucket{le="0.6"} 0.0
+claimcheck_confianza_prediccion_bucket{le="0.7"} 1.0
+claimcheck_confianza_prediccion_bucket{le="0.8"} 3.0
+claimcheck_confianza_prediccion_bucket{le="0.9"} 4.0
+claimcheck_confianza_prediccion_bucket{le="1.0"} 4.0
+claimcheck_confianza_prediccion_bucket{le="+Inf"} 4.0
+claimcheck_confianza_prediccion_count 4.0
+claimcheck_confianza_prediccion_sum 2.9482999999999997
+# HELP claimcheck_confianza_prediccion_created Confianza de la clase propuesta
+# TYPE claimcheck_confianza_prediccion_created gauge
+claimcheck_confianza_prediccion_created 1.7941010442733989e+09
+# HELP claimcheck_claims_a_confirmar_total Claims enviados a confirmación obligatoria del revisor
+# TYPE claimcheck_claims_a_confirmar_total counter
+claimcheck_claims_a_confirmar_total 0.0
+# HELP claimcheck_claims_a_confirmar_created Claims enviados a confirmación obligatoria del revisor
+# TYPE claimcheck_claims_a_confirmar_created gauge
+claimcheck_claims_a_confirmar_created 1.7941010442734342e+09
+# HELP claimcheck_proporcion_oov Proporción de tokens fuera del vocabulario
+# TYPE claimcheck_proporcion_oov histogram
+claimcheck_proporcion_oov_bucket{le="0.0"} 3.0
+claimcheck_proporcion_oov_bucket{le="0.1"} 3.0
+claimcheck_proporcion_oov_bucket{le="0.2"} 4.0
+claimcheck_proporcion_oov_bucket{le="0.3"} 4.0
+claimcheck_proporcion_oov_bucket{le="0.5"} 4.0
+claimcheck_proporcion_oov_bucket{le="0.7"} 4.0
+claimcheck_proporcion_oov_bucket{le="0.9"} 4.0
+claimcheck_proporcion_oov_bucket{le="1.0"} 4.0
+claimcheck_proporcion_oov_bucket{le="+Inf"} 4.0
+claimcheck_proporcion_oov_count 4.0
+claimcheck_proporcion_oov_sum 0.1429
+# HELP claimcheck_proporcion_oov_created Proporción de tokens fuera del vocabulario
+# TYPE claimcheck_proporcion_oov_created gauge
+claimcheck_proporcion_oov_created 1.794101044273443e+09
+# HELP claimcheck_retroalimentacion_total Confirmaciones del revisor
+# TYPE claimcheck_retroalimentacion_total counter
+# HELP claimcheck_modelo_info Versión del modelo en servicio (valor 1)
+# TYPE claimcheck_modelo_info gauge
+claimcheck_modelo_info{replica="captura1",version_modelo="1.2.0"} 1.0

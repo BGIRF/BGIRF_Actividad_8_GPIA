@@ -1,0 +1,253 @@
+{
+  "id": "RB-03#3",
+  "runbook": "RB-03",
+  "incidente": "INC-03",
+  "alerta": "DataDriftEntradasCritico",
+  "severidad": "P2",
+  "inicio_t": 314,
+  "gen": null,
+  "estado": "completado",
+  "pasos": [
+    {
+      "t": 314,
+      "hora": "14:14",
+      "fase": "Identificación",
+      "accion": "DataDriftEntradasCritico (P2) en INC-03",
+      "resultado": "Data drift: PSI máximo 0.64 en 'idioma' (umbral 0.20).",
+      "ok": true
+    },
+    {
+      "t": 314,
+      "hora": "14:14",
+      "fase": "Diagnóstico",
+      "accion": "Integridad de los datos de entrada",
+      "resultado": "0 solicitudes rechazadas por esquema (422) en 30 min: los datos llegan bien formados",
+      "ok": true
+    },
+    {
+      "t": 314,
+      "hora": "14:14",
+      "fase": "Diagnóstico",
+      "accion": "PSI por característica vs referencia",
+      "resultado": "idioma 0.64, prop_oov 0.29, confianza 0.10, n_caracteres 0.08, n_tokens 0.04, prop_digitos 0.00",
+      "ok": true,
+      "datos": {
+        "psi": {
+          "n_caracteres": 0.0829,
+          "n_tokens": 0.0421,
+          "prop_digitos": 0.0002,
+          "prop_oov": 0.2939,
+          "confianza": 0.0998,
+          "idioma": 0.6413
+        }
+      }
+    },
+    {
+      "t": 314,
+      "hora": "14:14",
+      "fase": "Diagnóstico",
+      "accion": "Identificar el segmento que cambió",
+      "resultado": "Claims en inglés: 1% en la referencia → 17% en producción (χ² p = 9.0e-09); nuevo segmento: etiquetas de exportación a EE. UU.",
+      "ok": true
+    },
+    {
+      "t": 314,
+      "hora": "14:14",
+      "fase": "Diagnóstico",
+      "accion": "Impacto en el modelo (sin etiquetas)",
+      "resultado": "confianza media 0.47; 28 % de claims a confirmación; JSD predicciones 0.006",
+      "ok": true
+    },
+    {
+      "t": 314,
+      "hora": "14:14",
+      "fase": "Diagnóstico",
+      "accion": "Descartar regresión del modelo",
+      "resultado": "Sin despliegues en 2 h: no aplica rollback",
+      "ok": true
+    },
+    {
+      "t": 314,
+      "hora": "14:14",
+      "fase": "Acción",
+      "accion": "Mitigación inmediata",
+      "resultado": "Los claims con confianza < τ ya van a confirmación obligatoria; aviso al equipo de revisión por el aumento de carga",
+      "ok": true
+    },
+    {
+      "t": 314,
+      "hora": "14:14",
+      "fase": "Espera",
+      "accion": "Esperar etiquetas del revisor del segmento nuevo (9/80)",
+      "resultado": "Se reanuda a las 14:19",
+      "ok": true
+    },
+    {
+      "t": 319,
+      "hora": "14:19",
+      "fase": "Espera",
+      "accion": "Esperar etiquetas del revisor del segmento nuevo (24/80)",
+      "resultado": "Se reanuda a las 14:24",
+      "ok": true
+    },
+    {
+      "t": 324,
+      "hora": "14:24",
+      "fase": "Espera",
+      "accion": "Esperar etiquetas del revisor del segmento nuevo (41/80)",
+      "resultado": "Se reanuda a las 14:29",
+      "ok": true
+    },
+    {
+      "t": 329,
+      "hora": "14:29",
+      "fase": "Espera",
+      "accion": "Esperar etiquetas del revisor del segmento nuevo (61/80)",
+      "resultado": "Se reanuda a las 14:34",
+      "ok": true
+    },
+    {
+      "t": 334,
+      "hora": "14:34",
+      "fase": "Espera",
+      "accion": "Esperar etiquetas del revisor del segmento nuevo (77/80)",
+      "resultado": "Se reanuda a las 14:39",
+      "ok": true
+    },
+    {
+      "t": 339,
+      "hora": "14:39",
+      "fase": "Acción",
+      "accion": "Etiquetas confirmadas del segmento nuevo disponibles",
+      "resultado": "94 claims en inglés confirmados por revisores",
+      "ok": true
+    },
+    {
+      "t": 339,
+      "hora": "14:39",
+      "fase": "Acción",
+      "accion": "Pipeline de reentrenamiento (automático)",
+      "resultado": "201 claims (130 del revisor, sin conjuntos dorados); run MLflow 0cd57977",
+      "ok": true
+    },
+    {
+      "t": 339,
+      "hora": "14:39",
+      "fase": "Validación",
+      "accion": "Compuerta champion vs challenger en conjuntos dorados",
+      "resultado": "ES macro-F1 0.852 → 0.864; ES recall SALUD 0.857 → 0.857; EN exactitud 0.367 → 0.900; EN recall SALUD 0.067 → 1.000",
+      "ok": true,
+      "datos": {
+        "criterios": {
+          "f1_es_sin_regresion": true,
+          "recall_salud_es_sin_regresion": true,
+          "exactitud_segmento_nuevo": true,
+          "recall_salud_segmento_nuevo": true
+        }
+      }
+    },
+    {
+      "t": 339,
+      "hora": "14:39",
+      "fase": "Espera",
+      "accion": "Aprobación humana de la promoción (ML engineer + responsable de calidad, simulada)",
+      "resultado": "Se reanuda a las 14:49",
+      "ok": true
+    },
+    {
+      "t": 349,
+      "hora": "14:49",
+      "fase": "Acción",
+      "accion": "Promover v3 (alias @champion) y recargar réplicas",
+      "resultado": "1 réplica(s) sirviendo modelo 1.2.0; v1 queda como @estable para rollback",
+      "ok": true
+    },
+    {
+      "t": 349,
+      "hora": "14:49",
+      "fase": "Acción",
+      "accion": "Actualizar la referencia de drift",
+      "resultado": "Referencia nueva: v3 · ES validación + segmento EN (53%); mezcla estimada a partir de 40% de claims en inglés observados (la referencia anterior seguiría marcando drift con el modelo corregido)",
+      "ok": true
+    },
+    {
+      "t": 349,
+      "hora": "14:49",
+      "fase": "Validación",
+      "accion": "Prueba de humo en ambos segmentos",
+      "resultado": "ES exactitud 0.80; EN exactitud 0.90",
+      "ok": true
+    },
+    {
+      "t": 349,
+      "hora": "14:49",
+      "fase": "Espera",
+      "accion": "Validación en producción: etiquetas del revisor y drift contra la nueva referencia",
+      "resultado": "Se reanuda a las 15:09",
+      "ok": true
+    },
+    {
+      "t": 369,
+      "hora": "15:09",
+      "fase": "Validación",
+      "accion": "Exactitud confirmada de v3 y PSI contra la nueva referencia",
+      "resultado": "exactitud modelo 1.2.0: 0.93 (n=210); PSI máx. 0.09",
+      "ok": true,
+      "datos": {
+        "por_version": {
+          "1.0.0": {
+            "n": 210,
+            "exactitud": 0.6381,
+            "recall_salud": 0.3091
+          },
+          "1.2.0": {
+            "n": 210,
+            "exactitud": 0.9333,
+            "recall_salud": 0.9623
+          }
+        }
+      }
+    },
+    {
+      "t": 369,
+      "hora": "15:09",
+      "fase": "Cierre",
+      "accion": "v3 pasa a @estable",
+      "resultado": "Postmortem y actualización del runbook",
+      "ok": true
+    }
+  ],
+  "reanudar_en": null,
+  "fin_t": 369,
+  "restaurado_t": 369,
+  "run_id": "772b944a14c24547a7300a9509ea14aa",
+  "resultado": {
+    "aprobada": true,
+    "version": "3",
+    "criterios": {
+      "f1_es_sin_regresion": true,
+      "recall_salud_es_sin_regresion": true,
+      "exactitud_segmento_nuevo": true,
+      "recall_salud_segmento_nuevo": true
+    },
+    "candidata": {
+      "es_accuracy": 0.8639,
+      "es_f1_macro": 0.8636,
+      "es_recall_salud": 0.8571,
+      "en_accuracy": 0.9,
+      "en_f1_macro": 0.8983,
+      "en_recall_salud": 1.0
+    },
+    "estable": {
+      "es_accuracy": 0.8521,
+      "es_f1_macro": 0.8523,
+      "es_recall_salud": 0.8571,
+      "en_accuracy": 0.3667,
+      "en_f1_macro": 0.3115,
+      "en_recall_salud": 0.0667
+    },
+    "n_entrenamiento": 201,
+    "n_etiquetas_revisor": 130,
+    "run_id": "0cd57977365f4366a469faafa15bae72"
+  }
+}

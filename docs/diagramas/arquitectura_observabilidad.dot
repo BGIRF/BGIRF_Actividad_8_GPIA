@@ -1,0 +1,48 @@
+digraph G {
+  graph [rankdir=TB, fontname="DejaVu Sans", fontsize=11, nodesep=0.25, ranksep=0.38, pad=0.15, bgcolor="white", newrank=true];
+  node  [shape=box, style="rounded,filled", fontname="DejaVu Sans", fontsize=10, color="#c9d2cf", fillcolor="white", penwidth=1.2, margin="0.12,0.06"];
+  edge  [fontname="DejaVu Sans", fontsize=8.5, color="#52514e", arrowsize=0.7];
+
+  {rank=same; usuarios [label="Revisores y clientes\n(portal / REST)", fillcolor="#f4f6f5"];
+              revisores [label="Revisor técnico: confirma la\ncategoría 5–15 min después", fillcolor="#f4f6f5"];}
+
+  subgraph cluster_api {
+    label="claimcheck-api v1.1 · 1–3 réplicas"; labeljust="l"; fontsize=9.5; fontcolor="#1f5fa8"; style="rounded,dashed"; color="#9ec5f4";
+    api [label="FastAPI + middleware de observabilidad\n/clasificar · /lote · /analizar-etiqueta · /retroalimentacion · /metrics · /admin", fillcolor="#e5eefa"];
+    modelo [label="Modelo @champion (MLflow Model Registry)\nTF-IDF + regresión logística · SHA-256 verificado", fillcolor="#fbeedd"];
+    api -> modelo [dir=both, arrowsize=0.6];
+  }
+
+  subgraph cluster_senales {
+    label="Señales: los tres pilares + verdad de referencia"; labeljust="l"; fontsize=9.5; fontcolor="#0e5e57"; style="rounded"; color="#9fd3c7";
+    {rank=same;
+    metricas [label="Métricas Prometheus\nlatencia · solicitudes · CPU\nconfianza · OOV · predicciones", fillcolor="#e1f3ef"];
+    logs [label="Logs JSON por solicitud\nrasgos del claim (sin texto)\n+ trace_id", fillcolor="#e1f3ef"];
+    trazas [label="Trazas MLflow (10 %)\ncaracterísticas → inferencia\n→ motor de reglas", fillcolor="#e1f3ef"];
+    etiquetas [label="Almacén de etiquetas\ndel revisor", fillcolor="#e1f3ef"];}
+  }
+
+  subgraph cluster_monitor {
+    label="Monitor proactivo · cada minuto"; labeljust="l"; fontsize=9.5; fontcolor="#7a4b00"; style="rounded"; color="#f2c98b";
+    {rank=same;
+    sli [label="SLI · burn rate\npresupuesto de error", fillcolor="#fdf3e1"];
+    drift [label="Data drift\nPSI · KS · JSD · χ²", fillcolor="#fdf3e1"];}
+    motor [label="Motor de alertas (config/alertas.yaml)\nburn rate multi-ventana · guardarraíles · umbrales dinámicos", fillcolor="#fdf3e1"];
+    gestor [label="Gestor de incidentes\ninhibición · agrupación · deduplicación · escalamiento", fillcolor="#fdf3e1"];
+    sli -> motor; drift -> motor; motor -> gestor;
+  }
+
+  {rank=same;
+  canales [label="Notificaciones\npager · Slack · ticket", fillcolor="#f8e1e1"];
+  runbooks [label="Runbooks automatizados\nRB-01 rollback · RB-02 escalar\nRB-03 reentrenar · RB-04 reiniciar", fillcolor="#f2e9f8"];
+  tablero [label="Tablero operativo\nen tiempo real", fillcolor="#f4f6f5"];
+  mlflow [label="MLflow: métricas por minuto,\nruns de runbooks, trazas, registro", fillcolor="#f4f6f5"];}
+
+  usuarios -> api; revisores -> api;
+  api -> metricas; api -> logs; api -> trazas; api -> etiquetas;
+  logs -> sli; logs -> drift; metricas -> sli [style=dashed, xlabel="Prometheus\n(portable)"];
+  gestor -> canales; gestor -> runbooks [xlabel="P1/P2"]; gestor -> tablero; gestor -> mlflow;
+  etiquetas -> runbooks [style=dashed, xlabel="reentrenar"];
+  trazas -> mlflow [style=dashed];
+  runbooks -> modelo [label="mover alias · recargar\nescalar · limitar lotes", color="#8e44ad", fontcolor="#8e44ad", constraint=false];
+}

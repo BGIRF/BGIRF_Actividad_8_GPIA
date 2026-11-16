@@ -1,0 +1,22 @@
+{"t": 70, "ts": "2026-11-07T10:10:00-06:00", "estado": "disparada", "alerta": "CambioDistribucionPredicciones", "severidad": "P2", "grupo": "calidad_modelo", "valor": 0.0644, "resumen": "La mezcla de categorías propuestas cambió (JSD 0.064) sin esperar etiquetas del revisor.", "inhibida": false}
+{"t": 77, "ts": "2026-11-07T10:17:00-06:00", "estado": "resuelta", "alerta": "CambioDistribucionPredicciones"}
+{"t": 182, "ts": "2026-11-07T12:02:00-06:00", "estado": "disparada", "alerta": "TraficoAnomalo", "severidad": "INFO", "grupo": "rendimiento", "valor": 1022, "resumen": "Tráfico de 1022 claims/min (umbral dinámico 60).", "inhibida": false}
+{"t": 184, "ts": "2026-11-07T12:04:00-06:00", "estado": "disparada", "alerta": "CPUSaturacion", "severidad": "P3", "grupo": "rendimiento", "valor": 97.4, "resumen": "CPU de la réplica más cargada en 97 %.", "inhibida": false}
+{"t": 191, "ts": "2026-11-07T12:11:00-06:00", "estado": "disparada", "alerta": "LatenciaSLOQuemaRapida", "severidad": "P2", "grupo": "rendimiento", "valor": 6.137931034482754, "resumen": "p95 de /clasificar en 2177 ms; el presupuesto de latencia se consume 6.1× más rápido.", "inhibida": false}
+{"t": 192, "ts": "2026-11-07T12:12:00-06:00", "estado": "resuelta", "alerta": "CPUSaturacion"}
+{"t": 192, "ts": "2026-11-07T12:12:00-06:00", "estado": "resuelta", "alerta": "LatenciaSLOQuemaRapida"}
+{"t": 225, "ts": "2026-11-07T12:45:00-06:00", "estado": "resuelta", "alerta": "TraficoAnomalo"}
+{"t": 314, "ts": "2026-11-07T14:14:00-06:00", "estado": "disparada", "alerta": "DataDriftEntradasCritico", "severidad": "P2", "grupo": "datos", "valor": 0.6413, "resumen": "Data drift: PSI máximo 0.64 en 'idioma' (umbral 0.20).", "inhibida": false}
+{"t": 316, "ts": "2026-11-07T14:16:00-06:00", "estado": "disparada", "alerta": "DataDriftEntradasAdvertencia", "severidad": "P3", "grupo": "datos", "valor": 0.8203, "resumen": "Las entradas empiezan a alejarse de la referencia (PSI 0.82).", "inhibida": true}
+{"t": 324, "ts": "2026-11-07T14:24:00-06:00", "estado": "disparada", "alerta": "ConfirmacionesRevisorAltas", "severidad": "P3", "grupo": "datos", "valor": 0.3558282208588957, "resumen": "36 % de claims requieren confirmación manual (umbral dinámico 29 %): sube la carga del revisor.", "inhibida": true}
+{"t": 333, "ts": "2026-11-07T14:33:00-06:00", "estado": "disparada", "alerta": "RecallSaludBajo", "severidad": "P1", "grupo": "calidad_modelo", "valor": 0.6470588235294118, "resumen": "Recall de SALUD en 0.65 (mínimo 0.70): claims de salud se están enrutando fuera de CL-SAL.", "inhibida": false}
+{"t": 335, "ts": "2026-11-07T14:35:00-06:00", "estado": "disparada", "alerta": "CalidadSLOQuemaRapida", "severidad": "P1", "grupo": "calidad_modelo", "valor": 1.2521440823327619, "resumen": "25 % de los claims confirmados por el revisor estaban mal enrutados (burn rate 1.25×).", "inhibida": false}
+{"t": 342, "ts": "2026-11-07T14:42:00-06:00", "estado": "resuelta", "alerta": "CalidadSLOQuemaRapida"}
+{"t": 343, "ts": "2026-11-07T14:43:00-06:00", "estado": "disparada", "alerta": "CambioDistribucionPredicciones", "severidad": "P3", "grupo": "calidad_modelo", "valor": 0.0484, "resumen": "La mezcla de categorías propuestas cambió (JSD 0.048) sin esperar etiquetas del revisor.", "inhibida": true}
+{"t": 347, "ts": "2026-11-07T14:47:00-06:00", "estado": "disparada", "alerta": "CalidadSLOQuemaRapida", "severidad": "P1", "grupo": "calidad_modelo", "valor": 1.3931623931623935, "resumen": "28 % de los claims confirmados por el revisor estaban mal enrutados (burn rate 1.39×).", "inhibida": false}
+{"t": 350, "ts": "2026-11-07T14:50:00-06:00", "estado": "resuelta", "alerta": "CalidadSLOQuemaRapida"}
+{"t": 350, "ts": "2026-11-07T14:50:00-06:00", "estado": "resuelta", "alerta": "RecallSaludBajo"}
+{"t": 353, "ts": "2026-11-07T14:53:00-06:00", "estado": "resuelta", "alerta": "CambioDistribucionPredicciones"}
+{"t": 356, "ts": "2026-11-07T14:56:00-06:00", "estado": "resuelta", "alerta": "ConfirmacionesRevisorAltas"}
+{"t": 357, "ts": "2026-11-07T14:57:00-06:00", "estado": "resuelta", "alerta": "DataDriftEntradasCritico"}
+{"t": 360, "ts": "2026-11-07T15:00:00-06:00", "estado": "resuelta", "alerta": "DataDriftEntradasAdvertencia"}

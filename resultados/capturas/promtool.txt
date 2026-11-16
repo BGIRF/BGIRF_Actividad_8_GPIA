@@ -1,0 +1,13 @@
+$ promtool check rules reglas_claimcheck.yml
+Checking reglas_claimcheck.yml
+  SUCCESS: 12 rules found
+$ promtool test rules pruebas_reglas.yml
+  SUCCESS
+$ amtool check-config alertmanager.yml
+Checking 'alertmanager.yml'  SUCCESS
+Found:
+ - global config
+ - route
+ - 4 inhibit rules
+ - 4 receivers
+ - 0 templates
