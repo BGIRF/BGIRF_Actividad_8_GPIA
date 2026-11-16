@@ -1,0 +1,21 @@
+# API (mismas versiones que la Fase 2: el modelo se serializó con ellas)
+fastapi==0.162.0
+uvicorn==0.54.0
+pydantic==2.14.2
+scikit-learn==1.9.1
+numpy==2.5.4
+scipy==1.18.1
+joblib==1.6.0
+# Observabilidad y operación (Actividad 8)
+mlflow==3.18.0
+prometheus-client==0.26.0
+PyYAML==6.0.3
+pandas==3.0.5
+psutil==7.2.2
+requests==2.34.2
+# Análisis, figuras y capturas
+matplotlib==3.11.2
+playwright==1.63.0
+# Pruebas
+pytest==9.1.1
+httpx2==2.13.1
